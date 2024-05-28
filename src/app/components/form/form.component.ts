@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
-  standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  // standalone: true,
+  // imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })

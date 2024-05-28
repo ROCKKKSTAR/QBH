@@ -7,20 +7,23 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-table',
-  standalone: true,
-  imports: [MatTableModule,MatButtonModule, CommonModule],
+  // standalone: true,
+  // imports: [MatTableModule,MatButtonModule, CommonModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
 export class TableComponent implements OnInit {
 
   @Input() userDataTable: any[] = []
-  users: any[] = [];
+  // users: any[] = [];
 
   displayedColumns: string[] = ['name', 'email', 'phoneNumber', 'address', 'actions'];
   dataSourceUserData: any;
  @Output() addUser = new EventEmitter<any>()
 
+ @Input() users: any[] = [];
+ @Output() generatePDF = new EventEmitter<void>();
+ @Output() downloadPDF = new EventEmitter<void>();
 
   constructor(private userService: UserService) {}
 
@@ -30,7 +33,8 @@ this.users = this.userService.getUsers();
 this.dataSourceUserData = new MatTableDataSource(this.userDataTable)
   }
 
-  ngOnChange(change: SimpleChanges){
+  ngOnChanges(_changes: SimpleChanges) {
+
     this.dataSourceUserData = new MatTableDataSource(this.userDataTable)
   }
 
@@ -43,12 +47,20 @@ this.dataSourceUserData = new MatTableDataSource(this.userDataTable)
     this.users = this.userService.getUsers();
   }
 
-  generatePDF(): void {
-    this.userService.generatePDF(this.users);
+  // generatePDF(): void {
+  //   this.userService.generatePDF(this.users);
+  // }
+
+  // downloadPDF(): void {
+  //   this.userService.downloadPDF();
+  // }
+
+  onGeneratePDF() {
+    this.generatePDF.emit();
   }
 
-  downloadPDF(): void {
-    this.userService.downloadPDF();
+  onDownloadPDF() {
+    this.downloadPDF.emit();
   }
 
   viewPDF(): void {
@@ -58,6 +70,6 @@ this.dataSourceUserData = new MatTableDataSource(this.userDataTable)
   addNewData(): void {
     this.addUser.emit({status: true})
     this.users = this.userService.getUsers();
-    this.dataSourceUserData = new MatTableDataSource(this.users)
+    // this.dataSourceUserData = new MatTableDataSource(this.users)
   }
 }

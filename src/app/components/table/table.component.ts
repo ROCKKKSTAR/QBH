@@ -7,8 +7,8 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-table',
-  // standalone: true,
-  // imports: [MatTableModule,MatButtonModule, CommonModule],
+  standalone: true,
+  imports: [MatTableModule,MatButtonModule, CommonModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -18,7 +18,7 @@ export class TableComponent implements OnInit {
   // users: any[] = [];
 
   displayedColumns: string[] = ['name', 'email', 'phoneNumber', 'address', 'actions'];
-  dataSourceUserData: any;
+  dataSourceUserData!: MatTableDataSource<any>;
  @Output() addUser = new EventEmitter<any>()
 
  @Input() users: any[] = [];
@@ -28,9 +28,9 @@ export class TableComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-// this.dataSourceUserData = new MatTableDataSource(this.userDataTable)
-this.users = this.userService.getUsers();
-this.dataSourceUserData = new MatTableDataSource(this.userDataTable)
+    this.users = this.userService.getUsers();
+    // this.dataSourceUserData = new MatTableDataSource(this.users)
+    this.dataSourceUserData = new MatTableDataSource(this.userDataTable)
   }
 
   ngOnChanges(_changes: SimpleChanges) {
@@ -73,3 +73,5 @@ this.dataSourceUserData = new MatTableDataSource(this.userDataTable)
     // this.dataSourceUserData = new MatTableDataSource(this.users)
   }
 }
+// export { MatTableModule };
+

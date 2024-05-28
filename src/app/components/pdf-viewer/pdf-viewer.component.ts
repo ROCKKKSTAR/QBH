@@ -11,6 +11,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './pdf-viewer.component.css'
 })
 export class PdfViewerComponent {
-  @Input() pdfSrc: string | ArrayBuffer | null = null;
+  // @Input() pdfSrc: string | ArrayBuffer | null = null;
 
 }
